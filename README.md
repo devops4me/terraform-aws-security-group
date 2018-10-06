@@ -1,18 +1,15 @@
 
 # Create Security Group Rules | Terraform Module
 
-Refactor to use this module and avoid **hundreds of lines of very similar security group** terraform definitions.
+**Avoid hundreds of lines of similar security group definitions** by refactoring to use this security group and rule creation terraform module.
+
+You specify every ingress rule you need in just one line with words like **ssh**, https, **sftp**, rabbitmq, **kube-control-plane** or openvpn. If you omit in_egress the ubiquitous "all-traffic" is assumed.
 
 ## Usage
 
-You specify every ingress rule you need in just one line with words like **ssh**, https, **sftp**, rabbitmq, kube-controller and **openvpn**. If you omit in_egress then the ubiquitous "all-traffic" is assumed.
-
- The most common usage is to specify the VPC ID and the ingress (inbound) rules To use this module simply declare it like below supplying it with a mandatory VPC id. If you omit **in_ingress** a default ssh rule is created. A default **all traffic egress rule** is also created but you can override this behaviour if you so wish.
-
-
-    module security_groups
+    module security_group
     {
-        source     = "github.com/devops-ip/terraform-aws-security-groups"
+        source     = "github.com/devops-ip/terraform-aws-security-group"
         in_ingress = [ "ssh", "http", "https" ]
         in_vpc_id  = "${module.vpc.vpc_id}"
     }
@@ -22,14 +19,16 @@ You specify every ingress rule you need in just one line with words like **ssh**
         ami = "${var.ubuntu-amis[ "${data.aws_region.with.name}" ]}"
         instance_type = "t2.micro"
 
-        vpc_security_group_ids = "${module.security_groups.out_security_group_ids}"
+        vpc_security_group_ids = "${module.security_group.out_security_group_ids}"
     }
 
 
+Output **out_security_group_ids** is a **list** whilst **out_security_group_id** is a **string**.
 
-This module defines two **list outputs** called **out_default_security_group_ids** and **out_new_security_group_ids**. Use the first after creating rules against the VPC's default security group and the second after a new security group is created (see variable in_use_default).
+## [Examples and Tests](test-security.group)
 
-    vpc_security_group_ids = [ "${module.security_group_module.out_default_security_group_ids}" ]
+**[This terraform module has runnable example integration tests](test-security.group)**. Read the instructions on how to clone the project and run the integration tests.
+
 
 ## Security Group Module Inputs
 
