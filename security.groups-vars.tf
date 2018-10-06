@@ -71,44 +71,34 @@ variable in_use_default
 }
 
 
-### ############################ ###
-### [[variable]] in_ecosystem_id ###
-### ############################ ###
+### ################################# ###
+### [[output]] out_security_group_ids ###
+### ################################# ###
 
-variable in_ecosystem_id
+output out_security_group_ids
 {
-    description = "Identifier binding all infrastructure components created for this ecosystem instance."
+    description = "One element list with ID of either the default security group or the new one."
+    value       = [ "${ var.in_use_default ? aws_default_security_group.default.id : aws_security_group.new.id }" ]
 }
 
 
-### ############################ ###
-### [[variable]] in_history_note ###
-### ############################ ###
+### ################################ ###
+### [[output]] out_security_group_id ###
+### ################################ ###
 
-variable in_history_note
+output out_security_group_id
 {
-    description = "Note describing the whys and wherefores of this creation."
+    description = "The string ID of either the default security group or the just created new one."
+    value       = "${ var.in_use_default ? aws_default_security_group.default.id : aws_security_group.new.id }"
 }
 
 
-### ######################################### ###
-### [[output]] out_default_security_group_ids ###
-### ######################################### ###
+### ######################### ###
+### [[variable]] in_ecosystem ###
+### ######################### ###
 
-output out_default_security_group_ids
+variable in_ecosystem
 {
-    description = "If in_use_default is true this output variable will be set."
-# ---@----@-->    value       = "${aws_default_security_group.default.*.id}"
-    value       = "${aws_default_security_group.default.id}"
+    description = "The name of the class of ecosystem being built like kubernetes-cluster or elasticsearch-db."
+    default     = "eco-system"
 }
-
-
-# ---@----@-->### ############################# ###
-# ---@----@-->### [[output]] out_new_security_group_ids ###
-# ---@----@-->### ############################# ###
-# ---@----@-->output "out_new_security_group_ids"
-# ---@----@-->{
-# ---@----@-->    description = "If in_use_default is false this output variable will be set."
-# ---@----@-->    value       = "${aws_security_group.sgroup-new.*.id}"
-# ---@----@-->}
-

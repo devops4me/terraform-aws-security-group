@@ -1,18 +1,31 @@
 
-# Rules Terraform Modules | Creates Security Group | Adds Rules
+# Create Security Group Rules | Terraform Module
 
-This security-group module **adds ingress and egress rules** to **either the default or a new** security group within a given VPC.
+Refactor to use this module and avoid **hundreds of lines of very similar security group** terraform definitions.
 
-## Simple Module Usage Example
+## Usage
 
-To use this module simply declare it like below supplying it with a mandatory VPC id. If you omit **in_ingress** a default ssh rule is created. A default **all traffic egress rule** is also created but you can override this behaviour if you so wish.
+You specify every ingress rule you need in just one line with words like **ssh**, https, **sftp**, rabbitmq, kube-controller and **openvpn**. If you omit in_egress then the ubiquitous "all-traffic" is assumed.
 
-    module security_group_module
+ The most common usage is to specify the VPC ID and the ingress (inbound) rules To use this module simply declare it like below supplying it with a mandatory VPC id. If you omit **in_ingress** a default ssh rule is created. A default **all traffic egress rule** is also created but you can override this behaviour if you so wish.
+
+
+    module security_groups
     {
-        source          = "rules"
-        in_vpc_id       = "${module.vpc.vpc_id}"
-        in_ingress   = [ "ssh", "http", "https" ]
+        source     = "github.com/devops-ip/terraform-aws-security-groups"
+        in_ingress = [ "ssh", "http", "https" ]
+        in_vpc_id  = "${module.vpc.vpc_id}"
     }
+
+    resource aws_instance ec2-instance
+    {
+        ami = "${var.ubuntu-amis[ "${data.aws_region.with.name}" ]}"
+        instance_type = "t2.micro"
+
+        vpc_security_group_ids = "${module.security_groups.out_security_group_ids}"
+    }
+
+
 
 This module defines two **list outputs** called **out_default_security_group_ids** and **out_new_security_group_ids**. Use the first after creating rules against the VPC's default security group and the second after a new security group is created (see variable in_use_default).
 
@@ -37,6 +50,8 @@ The security group's input variables are vital to achieving the desired behaviou
 This security group module is simple but flexible as it needs to cater to many different tastes. Now follows a number of **overloading** facilities to craft your security group's behaviour.
 
 ### Specify the Creation of a Security Group
+This security-group module **adds ingress and egress rules** to **either the default or a new** security group within a given VPC.
+
 
 Passing **false** to the **in_use_default** flag causes the **creation of a security group**.
 
