@@ -27,6 +27,17 @@ variable in_egress
 }
 
 
+### ###################### ###
+### [[variable]] in_vpc_id ###
+### ###################### ###
+
+variable in_vpc_id
+{
+    description = "ID of umbrella VPC the security group falls under - if not set the default VPC is used."
+    default     = ""
+}
+
+
 ### ################################### ###
 ### [[variable]] in_ingress_cidr_blocks ###
 ### ################################### ###
@@ -51,47 +62,15 @@ variable in_egress_cidr_blocks
 }
 
 
-### ###################### ###
-### [[variable]] in_vpc_id ###
-### ###################### ###
-
-variable in_vpc_id
-{
-    description = "Mandatory VPC ID to create the security group under."
-}
-
-
 ### ########################### ###
 ### [[variable]] in_use_default ###
 ### ########################### ###
 
 variable in_use_default
 {
+    description = "By default rules are added to the default security group - false creates one first."
     default = true
 }
-
-
-### ################################# ###
-### [[output]] out_security_group_ids ###
-### ################################# ###
-
-output out_security_group_ids
-{
-    description = "One element list with ID of either the default security group or the new one."
-    value       = [ "${ var.in_use_default ? aws_default_security_group.default.id : aws_security_group.new.id }" ]
-}
-
-
-### ################################ ###
-### [[output]] out_security_group_id ###
-### ################################ ###
-
-output out_security_group_id
-{
-    description = "The string ID of either the default security group or the just created new one."
-    value       = "${ var.in_use_default ? aws_default_security_group.default.id : aws_security_group.new.id }"
-}
-
 
 ### ######################### ###
 ### [[variable]] in_ecosystem ###
@@ -99,6 +78,6 @@ output out_security_group_id
 
 variable in_ecosystem
 {
-    description = "The name of the class of ecosystem being built like kubernetes-cluster or elasticsearch-db."
+    description = "The name of the class of ecosystem being built like kubernetes-cluster or rabbit-mq"
     default     = "eco-system"
 }
