@@ -22,7 +22,6 @@ You specify every ingress rule you need in just one line with words like **ssh**
         vpc_security_group_ids = "${module.security_group.out_security_group_ids}"
     }
 
-
 Output **out_security_group_ids** is a **list** whilst **out_security_group_id** is a **string**.
 
 ## [Examples and Tests](test-security.group)
@@ -30,7 +29,18 @@ Output **out_security_group_ids** is a **list** whilst **out_security_group_id**
 **[This terraform module has runnable example integration tests](test-security.group)**. Read the instructions on how to clone the project and run the integration tests.
 
 
-## Security Group Module Inputs
+## Use Case
+
+What is the use case flow at the heart of this security group rule creation module?
+
+- a **VPC is provided** (or the default one is used)
+- a **security group is created** (or the default one for the VPC is used)
+- **ingress and egress rules are added to the security group**
+- the default source (and/or destination) of 0.0.0.0/0 is used
+- the rules can apply to specific supplied (source and/or destination) addresses
+
+
+## Inputs
 
 The security group's input variables are vital to achieving the desired behaviour.
 
@@ -38,11 +48,11 @@ The security group's input variables are vital to achieving the desired behaviou
 |:-------- |:---- |:------- |:------- |
 **in_vpc_id** | String | vpc-1234567890 | create security group/s under VPC with this id
 **in_use_default** | Boolean | [ true ] | use the default security group if true else create one
-**in_ingress** | List | [ "postgres", "https"] | identigy the ports to allow for inbound traffic
-**in_egress** | List | [ "all-traffic" ] | identigy the ports to allow for outbound traffic
+**in_ingress** | List | [ "postgres", "https"] | identify the ports to allow for inbound traffic
+**in_egress** | List | [ "all-traffic" ] | identify the ports to allow for outbound traffic
 **in_ingress_cidr_blocks** | List | [ "0.0.0.0/0"] | list of source incoming traffic addresses to allow
 **in_egress_cidr_blocks** | List | [ "0.0.0.0/0"] | list of VPC source outgoing traffic addresses to allow
-**in_ecosystem_id** | String | kube-19188-2306 | the ecosystem's identifier including a timestamp
+**in_ecosystem** | String | kube-19188-2306 | the ecosystem's identifier including a timestamp
 
 ## Alternate Module Inputs
 

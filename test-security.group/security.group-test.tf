@@ -5,29 +5,37 @@
 
 locals
 {
-    ecosystem_id = "vs-unittest"
+    ecosystem_id = "sgrules-test"
+}
+
+module vpc-subnets
+{
+    source       = "github.com/devops-ip/terraform-aws-vpc-subnets"
+    in_vpc_cidr  = "10.123.45.0/16"
+    in_ecosystem = "${local.ecosystem_id}"
 }
 
 module zero-param-test
 {
-    source = "github.com/devops-ip/terraform-aws-vpc-subnets"
+    source = "github.com/devops-ip/terraform-aws-security-group
 }
 
 module last-stable-release-test-0
 {
-    source       = "github.com/devops-ip/terraform-aws-vpc-subnets?ref=v0.1.0002"
-    in_vpc_cidr  = "10.234.56.0/24"
+    source       = "github.com/devops-ip/terraform-aws-security-group?ref=v0.1.0001"
+    in_ingress   = [ "ssh", "http", "https" ]
     in_ecosystem = "${local.ecosystem_id}-00"
 }
 
-module vpc-subnets-test-1
+module security-group-test-1
 {
-    source       = "github.com/devops-ip/terraform-aws-vpc-subnets"
-    version      = "v0.1.0002"
-    in_vpc_cidr  = "10.234.0.0/16"
+    source       = "github.com/devops-ip/terraform-aws-security-group"
+    version      = "v0.1.0001"
+    in_vpc_id    = "${module.vpc-subnets.out_vpc_id}"
     in_ecosystem = "${local.ecosystem_id}-01"
 }
 
+/*
 module vpc-subnets-test-2
 {
     source         =  "github.com/devops-ip/terraform-aws-vpc-subnets"
@@ -99,18 +107,12 @@ module vpc-subnets-test-9
     in_ecosystem           = "${local.ecosystem_id}-09"
 }
 
-output subnet_ids_1{ value = "${module.vpc-subnets-test-1.out_subnet_ids}" }
-output private_subnet_ids_1{ value = "${module.vpc-subnets-test-1.out_private_subnet_ids}" }
-output public_subnet_ids_1{ value = "${module.vpc-subnets-test-1.out_public_subnet_ids}" }
+*/
 
-output subnet_ids_2{ value = "${module.vpc-subnets-test-6.out_subnet_ids}" }
-output private_subnet_ids_2{ value = "${module.vpc-subnets-test-6.out_private_subnet_ids}" }
-output public_subnet_ids_2{ value = "${module.vpc-subnets-test-6.out_public_subnet_ids}" }
 
-output subnet_ids_3{ value = "${module.vpc-subnets-test-7.out_subnet_ids}" }
-output private_subnet_ids_3{ value = "${module.vpc-subnets-test-7.out_private_subnet_ids}" }
-output public_subnet_ids_3{ value = "${module.vpc-subnets-test-7.out_public_subnet_ids}" }
+output subnet_ids_1{ value = "${module.vpc-subnets.out_subnet_ids}" }
+output private_subnet_ids_1{ value = "${module.vpc-subnets.out_private_subnet_ids}" }
+output public_subnet_ids_1{ value = "${module.vpc-subnets.out_public_subnet_ids}" }
 
-output subnet_ids_4{ value = "${module.vpc-subnets-test-9.out_subnet_ids}" }
-output private_subnet_ids_4{ value = "${module.vpc-subnets-test-9.out_private_subnet_ids}" }
-output public_subnet_ids_4{ value = "${module.vpc-subnets-test-9.out_public_subnet_ids}" }
+output security_group_id_1 { value = "${module.security-group-test-1.out_security_group_id}"  }
+output security_group_ids_1{ value = "${module.security-group-test-1.out_security_group_ids}" }
