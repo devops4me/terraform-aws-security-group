@@ -11,7 +11,7 @@ locals
 module vpc-subnets
 {
     source       = "github.com/devops-ip/terraform-aws-vpc-subnets"
-    in_vpc_cidr  = "10.123.45.0/16"
+    in_vpc_cidr  = "10.123.0.0/16"
     in_ecosystem = "${local.ecosystem_id}"
 }
 
