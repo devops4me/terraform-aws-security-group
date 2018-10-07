@@ -20,12 +20,14 @@ module zero-param-test
     source = "github.com/devops-ip/terraform-aws-security-group"
 }
 
+/*
 module last-stable-release-test-0
 {
     source       = "github.com/devops-ip/terraform-aws-security-group?ref=v0.1.0001"
     in_ingress   = [ "ssh", "http", "https" ]
     in_ecosystem = "${local.ecosystem_id}-00"
 }
+*/
 
 module security-group-test-1
 {

@@ -79,3 +79,13 @@ resource aws_security_group_rule egress
     to_port     = "${element(var.rules[var.in_egress[count.index]], 1)}"
     protocol    = "${element(var.rules[var.in_egress[count.index]], 2)}"
 }
+
+
+### ################# ###
+### [[module]] ecosys ###
+### ################# ###
+
+module ecosys
+{
+    source = "github.com/devops-ip/terraform-aws-stamps"
+}
