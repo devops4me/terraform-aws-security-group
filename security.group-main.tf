@@ -31,9 +31,10 @@ resource aws_default_security_group default
 
     tags
     {
-        Name   = "default-sg-${var.in_ecosystem_id}"
-        Group  = "eco-system-${var.in_ecosystem_id}"
-        Desc   = "This default VPC security group ${var.in_history_note}"
+        Name   = "security-group-${ var.in_ecosystem }-${ module.ecosys.out_stamp }"
+        Class = "${ var.in_ecosystem }"
+        Instance = "${ var.in_ecosystem }-${ module.ecosys.out_stamp }"
+        Desc   = "The default security group in the VPC for ${ var.in_ecosystem } ${ module.ecosys.out_history_note }"
     }
 
 }

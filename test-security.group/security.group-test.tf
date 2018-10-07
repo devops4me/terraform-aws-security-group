@@ -17,7 +17,7 @@ module vpc-subnets
 
 module zero-param-test
 {
-    source = "github.com/devops-ip/terraform-aws-security-group
+    source = "github.com/devops-ip/terraform-aws-security-group"
 }
 
 module last-stable-release-test-0
