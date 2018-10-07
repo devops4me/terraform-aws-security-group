@@ -12,7 +12,7 @@ module vpc-subnets
 {
     source       = "github.com/devops-ip/terraform-aws-vpc-subnets"
     in_vpc_cidr  = "10.123.0.0/16"
-    in_ecosystem = "${local.ecosystem_id}"
+    in_ecosystem = "${ local.ecosystem_id }"
 }
 
 module zero-param-test
@@ -33,8 +33,8 @@ module security-group-test-1
 {
     source       = "github.com/devops-ip/terraform-aws-security-group"
     version      = "v0.1.0001"
-    in_vpc_id    = "${module.vpc-subnets.out_vpc_id}"
-    in_ecosystem = "${local.ecosystem_id}-01"
+    in_vpc_id    = "${ module.vpc-subnets.out_vpc_id }"
+    in_ecosystem = "${ local.ecosystem_id }-01"
 }
 
 /*

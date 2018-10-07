@@ -5,7 +5,7 @@
 
 resource aws_security_group new
 {
-    count = "${ var.in_use_default == false ? 1 : 0 }"
+    count = "${ var.in_use_default ? 1 : 0 }"
 
     name        = "security-group-${ var.in_ecosystem }-${ module.ecosys.out_stamp }-n"
     description = "This new security group ${ module.ecosys.out_history_note }"
