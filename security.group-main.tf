@@ -2,23 +2,24 @@
 ### ####################################### ###
 ### [[resource]] aws_default_security_group ###
 ### ####################################### ###
-/*
-resource aws_security_group sgroup-new
-{
-    count = "${var.in_use_default == false ? 1 : 0}"
 
-    name        = "security-group-${var.in_ecosystem_id}"
-    description = "This security group ${var.in_history_note}"
+resource aws_security_group new
+{
+    count = "${ var.in_use_default == false ? 1 : 0 }"
+
+    name        = "security-group-${ var.in_ecosystem }-${ module.ecosys.out_stamp }-n"
+    description = "This new security group ${ module.ecosys.out_history_note }"
     vpc_id      = "${var.in_vpc_id}"
 
     tags
     {
-        Name   = "security-group-${var.in_ecosystem_id}"
-        Group  = "eco-system-${var.in_ecosystem_id}"
-        Desc   = "This security group ${var.in_history_note}"
+        Name   = "security-group-${ var.in_ecosystem }-${ module.ecosys.out_stamp }-n"
+        Class = "${ var.in_ecosystem }"
+        Instance = "${ var.in_ecosystem }-${ module.ecosys.out_stamp }"
+        Desc   = "Newly created security group for ${ var.in_ecosystem } ${ module.ecosys.out_history_note }"
     }
+
 }
-*/
 
 
 ### ####################################### ###
@@ -31,7 +32,7 @@ resource aws_default_security_group default
 
     tags
     {
-        Name   = "security-group-${ var.in_ecosystem }-${ module.ecosys.out_stamp }"
+        Name   = "security-group-${ var.in_ecosystem }-${ module.ecosys.out_stamp }-d"
         Class = "${ var.in_ecosystem }"
         Instance = "${ var.in_ecosystem }-${ module.ecosys.out_stamp }"
         Desc   = "The default security group in the VPC for ${ var.in_ecosystem } ${ module.ecosys.out_history_note }"
