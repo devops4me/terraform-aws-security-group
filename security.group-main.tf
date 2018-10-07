@@ -15,17 +15,16 @@ data aws_vpc default
 
 resource aws_security_group new
 {
-#################################    count       = "${ var.in_use_default ? 0 : 1 }"
     vpc_id      = "${ length(var.in_vpc_id) == 0 ? data.aws_vpc.default.id : var.in_vpc_id }"
     name        = "security-group-${ var.in_ecosystem }-${ module.ecosys.out_stamp }-n"
     description = "This new security group ${ module.ecosys.out_history_note }"
 
     tags
     {
-        Name     = "security-group-${ var.in_ecosystem }-${ module.ecosys.out_stamp }-n"
+        Name     = "${ var.in_use_default ? "empty-sg" : "security-group" }-${ var.in_ecosystem }-${ module.ecosys.out_stamp }-n"
         Class    = "${ var.in_ecosystem }"
         Instance = "${ var.in_ecosystem }-${ module.ecosys.out_stamp }"
-        Desc     = "Newly created security group for ${ var.in_ecosystem } ${ module.ecosys.out_history_note }"
+        Desc     = "${ var.in_use_default ? "Empty" : "Newly created" } security group for ${ var.in_ecosystem } ${ module.ecosys.out_history_note }"
     }
 
 }
@@ -37,7 +36,6 @@ resource aws_security_group new
 
 resource aws_default_security_group default
 {
-###########################    count  = "${ var.in_use_default ? 1 : 0 }"
     vpc_id = "${ length(var.in_vpc_id) == 0 ? data.aws_vpc.default.id : var.in_vpc_id }"
 
     tags

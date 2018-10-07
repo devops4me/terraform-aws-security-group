@@ -11,7 +11,13 @@ You specify every ingress rule you need in just one line with words like **ssh**
     {
         source     = "github.com/devops-ip/terraform-aws-security-group"
         in_ingress = [ "ssh", "http", "https" ]
-        in_vpc_id  = "${module.vpc.vpc_id}"
+        in_vpc_id  = "${module.ecosystem-vpc.out_vpc_id}"
+    }
+
+    module ecosystem-vpc
+    {
+        source       = "github.com/devops-ip/terraform-aws-vpc-subnets"
+        in_vpc_cidr  = "10.123.0.0/16"
     }
 
     resource aws_instance ec2-instance
