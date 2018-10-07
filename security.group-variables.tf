@@ -33,7 +33,7 @@ variable in_egress
 
 variable in_vpc_id
 {
-    description = "ID of umbrella VPC the security group falls under - if not set the default VPC is used."
+    description = "umbrella vpc the security group falls under which reverts to the default VPC if not set."
     default     = ""
 }
 

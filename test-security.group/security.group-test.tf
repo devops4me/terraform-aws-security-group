@@ -17,7 +17,7 @@ module vpc-subnets
 
 module zero-param-test
 {
-    source = "github.com/devops-ip/terraform-aws-security-group"
+    source       = ".."
 }
 
 /*
@@ -31,7 +31,7 @@ module last-stable-release-test-0
 
 module security-group-test-1
 {
-    source         = "github.com/devops-ip/terraform-aws-security-group"
+    source       = ".."
     in_vpc_id      = "${ module.vpc-subnets.out_vpc_id }"
     in_use_default = "true"
     in_ecosystem   = "${ local.ecosystem_id }-01"
@@ -39,9 +39,10 @@ module security-group-test-1
 
 module security-group-test-2
 {
-    source         = "github.com/devops-ip/terraform-aws-security-group"
+    source       = ".."
     in_vpc_id      = "${ module.vpc-subnets.out_vpc_id }"
-    in_use_default = "false"
+    in_use_default = "true"
+#####################    in_use_default = "false"
     in_ecosystem   = "${ local.ecosystem_id }-02"
 }
 
@@ -119,9 +120,11 @@ module vpc-subnets-test-9
 
 */
 
+/*
 output subnet_ids_1{ value = "${module.vpc-subnets.out_subnet_ids}" }
 output private_subnet_ids_1{ value = "${module.vpc-subnets.out_private_subnet_ids}" }
 output public_subnet_ids_1{ value = "${module.vpc-subnets.out_public_subnet_ids}" }
 
 output security_group_id_1 { value = "${module.security-group-test-1.out_security_group_id}"  }
 output security_group_ids_1{ value = "${module.security-group-test-1.out_security_group_ids}" }
+*/
