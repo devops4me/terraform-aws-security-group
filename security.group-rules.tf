@@ -64,12 +64,25 @@ variable "rules"
         java = [ 8080, 8080, "tcp", "HTTP" ]
 
 
-        # Open all ports & protocols
+        # Rules for all ports & protocols
         all-traffic   = [ -1, -1, "-1", "All protocols" ]
         all-tcp       = [ 0, 65535, "tcp", "All TCP ports" ]
         all-udp       = [ 0, 65535, "udp", "All UDP ports" ]
         all-icmp      = [ -1, -1, "icmp", "All IPV4 ICMP" ]
         all-ipv6-icmp = [ -1, -1, 58, "All IPV6 ICMP" ]
+
+
+	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
+	# < ~~~ rabbitmq and related protocols ~~~ >
+	# < --- ------------------------------ --- >
+        epmd         = [  4369,   4369,  "tcp",  "erlang port mapper" ]
+        amqp         = [  5672,   5672,  "tcp",  "message queue protocol" ]
+        amqps        = [  5671,   5671,  "tcp",  "message queue secure" ]
+        rabbitmq-tls = [  25672,  25672, "tcp",  "rabbitmq admin tls" ]
+        rabbitmq-adm = [  15672,  15672, "tcp",  "rabbitmq admin cli" ]
+        stomp        = [  61613,  61613, "tcp",  "STOMP without tls" ]
+        stomp-tls    = [  61614,  61614, "tcp",  "STOMP with tls" ]
+
 
     }
 
