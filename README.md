@@ -1,7 +1,7 @@
 
 # Create Security Group Rules | Terraform Module
 
-**Avoid hundreds of lines of similar security group definitions** by refactoring to use this security group and rule creation terraform module.
+**Avoid hundreds of lines of similar security group definitions** by refactoring in this rule creation module.
 
 You specify every ingress rule you need in just one line with words like **ssh**, https, **sftp**, rabbitmq, **kube-control-plane** or openvpn. If you omit in_egress the ubiquitous "all-traffic" is assumed.
 
