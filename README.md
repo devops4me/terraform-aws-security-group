@@ -14,17 +14,8 @@ You specify every ingress rule you need in just one line with words like **ssh**
         in_vpc_id  = "${module.ecosystem-vpc.out_vpc_id}"
     }
 
-    module ecosystem-vpc
+    resource aws_instance ec2
     {
-        source       = "github.com/devops-ip/terraform-aws-vpc-subnets"
-        in_vpc_cidr  = "10.123.0.0/16"
-    }
-
-    resource aws_instance ec2-instance
-    {
-        ami = "${var.ubuntu-amis[ "${data.aws_region.with.name}" ]}"
-        instance_type = "t2.micro"
-
         vpc_security_group_ids = "${module.security_group.out_security_group_ids}"
     }
 
