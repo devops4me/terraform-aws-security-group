@@ -74,14 +74,14 @@ variable "rules"
 	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
 	# < ~~~ rabbitmq and related protocols ~~~ >
 	# < --- ------------------------------ --- >
-        rabbitmq     = [  15672,  15672, "tcp",  "rabbitmq admin cli"     ]
-        rabbitmq-tls = [  25672,  25672, "tcp",  "rabbitmq admin tls"     ]
-        amqp         = [  5672,   5672,  "tcp",  "message queue protocol" ]
-        amqp-tls     = [  5671,   5671,  "tcp",  "message queue secure"   ]
-        stomp        = [  61613,  61613, "tcp",  "STOMP without tls"      ]
-        stomp-tls    = [  61614,  61614, "tcp",  "STOMP with tls"         ]
-        erlang-pmd   = [  4369,   4369,  "tcp",  "erlang port mapper"     ]
-        mqtt         = [  1883,   1883,  "tcp",  "mq series telemetry"    ]
+        rabbitmq     = [  15672,  15672, "tcp",     "rabbitmq admin cli" ]
+        rabbitmq-tls = [  25672,  25672, "tcp",     "rabbitmq admin tls" ]
+        amqp         = [  5672,   5672,  "tcp", "message queue protocol" ]
+        amqp-tls     = [  5671,   5671,  "tcp",   "message queue secure" ]
+        stomp        = [  61613,  61613, "tcp",      "STOMP without tls" ]
+        stomp-tls    = [  61614,  61614, "tcp",         "STOMP with tls" ]
+        erlang-pmd   = [  4369,   4369,  "tcp",     "erlang port mapper" ]
+        mqtt         = [  1883,   1883,  "tcp",    "mq series telemetry" ]
 
 
     }
