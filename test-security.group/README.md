@@ -13,7 +13,7 @@ So what happens at the core of the security group integration tests?
 
 ## How to Run the Integration Tests
 
-    $ git clone https://github.com/devops-ip/terraform-aws-security-group.git
+    $ git clone https://github.com/devops4me/terraform-aws-security-group.git
     $ cd terraform-aws-security-group
     $ terraform init .
     $ terraform apply -auto-approve

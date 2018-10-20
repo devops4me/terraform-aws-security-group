@@ -95,5 +95,5 @@ resource aws_security_group_rule egress
 
 module ecosys
 {
-    source = "github.com/devops-ip/terraform-aws-stamps"
+    source = "github.com/devops4me/terraform-aws-stamps"
 }

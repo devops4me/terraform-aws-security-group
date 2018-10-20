@@ -9,7 +9,7 @@ You specify every ingress rule you need in just one line with words like **ssh**
 
     module security_group
     {
-        source     = "github.com/devops-ip/terraform-aws-security-group"
+        source     = "github.com/devops4me/terraform-aws-security-group"
         in_ingress = [ "ssh", "http", "https" ]
         in_vpc_id  = "${module.vpc.out_vpc_id}"
     }
@@ -109,7 +109,7 @@ The outer list has no size restrictions but the inner list is expected to contai
 
 ### Contributing
 
-Bug reports and pull requests are welcome on GitHub at the https://github.com/devops-ip/terraform-aws-security-group page. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at the https://github.com/devops4me/terraform-aws-security-group page. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 License
 -------
