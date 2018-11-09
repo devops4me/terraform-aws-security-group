@@ -43,8 +43,8 @@ variable "rules"
         kube-read    = [ 10255, 10255, "tcp",  "kube read only" ]
 
 	# < ~~~ etcd client server api ~~~ >
-        etcd-1 = [ 2379, 2379, "tcp", "etcd services 1" ]
-        etcd-2 = [ 2380, 2380, "tcp", "etcd services 2" ]
+        etcd-client = [ 2379, 2379, "tcp", "etcd client" ]
+        etcd-server = [ 2380, 2380, "tcp", "etcd server" ]
 
 
         # -- ElasticSearch (ELK) Stack Rules
