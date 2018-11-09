@@ -45,6 +45,7 @@ variable "rules"
 	# < ~~~ etcd client server api ~~~ >
         etcd-client = [ 2379, 2379, "tcp", "etcd client" ]
         etcd-server = [ 2380, 2380, "tcp", "etcd server" ]
+        etcd-listen = [ 4001, 4001, "tcp", "etcd listen" ]
 
 
         # -- ElasticSearch (ELK) Stack Rules
