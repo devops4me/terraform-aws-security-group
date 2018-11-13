@@ -1,9 +1,9 @@
 
 # Create Security Group Rules | Terraform Module
 
-**Avoid hundreds of lines of similar security group definitions** by refactoring in this rule creation module.
+**You avoid hundreds of lines of similar security group definitions** by using this rule creation module.
 
-You specify every ingress rule you need in just one line with words like **ssh**, https, **sftp**, rabbitmq, **kube-control-plane** or openvpn. If you omit in_egress the ubiquitous "all-traffic" is assumed.
+In **just one line** with words like **ssh**, **https**, **sftp**, **rabbitmq**, **openvpn** or **all-traffic** you specify every AWS security group rule that you need. You can opt to create a new security group or use the VPC's default security group.
 
 ## Usage
 
@@ -21,9 +21,11 @@ You specify every ingress rule you need in just one line with words like **ssh**
 
 Output **out_security_group_ids** is a **list** whilst **out_security_group_id** is a **string**.
 
-## [Examples and Tests](test-security.group)
+## [Examples](integration.test.dir)
 
-**[This terraform module has runnable example integration tests](test-security.group)**. Read the instructions on how to clone the project and run the integration tests.
+For best results use this module in conjuction with the **[vpc subnets module](../terraform-aws-vpc-subnets)**. Visit the **[integration tests](integration.test.dir)** to discover how **just 2 simple modules** can create a VPC, subnets, internet gateway, route, security group and security group rules.
+
+These base infrastructure components house every AWS eco-system and are designed to increase the productivity and efficiency of a devops engineer.
 
 
 ## Use Case
@@ -94,18 +96,14 @@ Clearly you will want to allow ingress and egress traffic for various middleware
 
 Note that if you create an all traffic egress rule and you have an **IPV6 cidr block**, AWS will create an extra **::/0** egress rule in addition to the 0.0.0.0/0 (IPV4) rule.
 
-## Running the Module's Tests
 
-Visit the README within the **ztest-security** folder for instructions on running this module's tests.
+## Outputs
 
-## Creating New Rule Groups
+| Exported                 | Type   | Comment |
+|:------------------------ |:------ |:------- |
+**out_security_group_id**  | String | ID of the security group that contains the specified rules
+**out_security_group_ids** | Array  | One element list of the security group ID
 
-The outer list has no size restrictions but the inner list is expected to contain 4 elements.
-
-- the port [from] which [inbound] traffic should be allowed
-- the port [to] which [inbound] traffic should be allowed
-- the ICMA protocol that the traffic obeys
-- the (name) description of the traffic rule
 
 ### Contributing
 
