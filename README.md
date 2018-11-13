@@ -16,10 +16,10 @@ In **just one line** with words like **ssh**, **https**, **sftp**, **rabbitmq**,
 
     resource aws_instance ec2
     {
-        vpc_security_group_ids = "${module.security_group.out_security_group_ids}"
+        vpc_security_group_ids = [ "${module.security_group.out_security_group_id}" ]
     }
 
-Output **out_security_group_ids** is a **list** whilst **out_security_group_id** is a **string**.
+**out_security_group_id** is the fundamental module output **string** variable.
 
 ## [Examples](integration.test.dir)
 
@@ -102,7 +102,6 @@ Note that if you create an all traffic egress rule and you have an **IPV6 cidr b
 | Exported                 | Type   | Comment |
 |:------------------------ |:------ |:------- |
 **out_security_group_id**  | String | ID of the security group that contains the specified rules
-**out_security_group_ids** | Array  | One element list of the security group ID
 
 
 ### Contributing

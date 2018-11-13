@@ -64,8 +64,3 @@ output security_group_id
 {
     value = "${module.security-group-test-1.out_security_group_id}"
 }
-
-output security_group_ids
-{
-    value = "${module.security-group-test-2.out_security_group_ids}"
-}
