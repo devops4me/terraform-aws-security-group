@@ -23,7 +23,7 @@ Output **out_security_group_ids** is a **list** whilst **out_security_group_id**
 
 ## [Examples](integration.test.dir)
 
-For best results use this module in conjuction with the **[vpc subnets module](../terraform-aws-vpc-subnets)**. Visit the **[integration tests](integration.test.dir)** to discover how **just 2 simple modules** can create a VPC, subnets, internet gateway, route, security group and security group rules.
+For best results use this module in conjuction with the **[vpc subnets module](../../../terraform-aws-vpc-subnets)**. Visit the **[integration tests](integration.test.dir)** to discover how **just 2 simple modules** can create a VPC, subnets, internet gateway, route, security group and security group rules.
 
 These base infrastructure components house every AWS eco-system and are designed to increase the productivity and efficiency of a devops engineer.
 
