@@ -13,6 +13,8 @@ module virtual-private-cloud-1
 {
     source       = "github.com/devops4me/terraform-aws-vpc-network"
     in_vpc_cidr  = "10.123.0.0/16"
+    in_create_private_gateway = false
+    in_create_public_gateway  = false
     in_ecosystem = "${ local.ecosystem_id }"
 }
 
@@ -29,6 +31,8 @@ module virtual-private-cloud-2
 {
     source       = "github.com/devops4me/terraform-aws-vpc-network"
     in_vpc_cidr  = "10.124.0.0/16"
+    in_create_private_gateway = false
+    in_create_public_gateway  = false
     in_ecosystem = "${ local.ecosystem_id }"
 }
 
