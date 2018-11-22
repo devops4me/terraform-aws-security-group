@@ -38,7 +38,7 @@ module security-group-test-2
     in_ingress     = [ "elasticsearch", "ssh", "java" ]
     in_egress      = [ "all-traffic" ]
     in_vpc_id      = "${ module.virtual-private-cloud-2.out_vpc_id }"
-    in_use_default = "false"
+    in_use_default = "true"
     in_ecosystem   = "${ local.ecosystem_id }-02"
 }
 
