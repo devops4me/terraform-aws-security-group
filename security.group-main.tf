@@ -1,21 +1,11 @@
 
-### ####################### ###
-### [[data source]] aws_vpc ###
-### ####################### ###
-
-data aws_vpc default
-{
-    default = true
-}
-
-
 ### ####################################### ###
 ### [[resource]] aws_default_security_group ###
 ### ####################################### ###
 
 resource aws_security_group new
 {
-    vpc_id      = "${ length(var.in_vpc_id) == 0 ? data.aws_vpc.default.id : var.in_vpc_id }"
+    vpc_id      = "${ var.in_vpc_id }"
     name        = "security-group-${ var.in_ecosystem }-${ module.ecosys.out_stamp }-n"
     description = "This new security group ${ module.ecosys.out_history_note }"
 
@@ -36,7 +26,7 @@ resource aws_security_group new
 
 resource aws_default_security_group default
 {
-    vpc_id = "${ length(var.in_vpc_id) == 0 ? data.aws_vpc.default.id : var.in_vpc_id }"
+    vpc_id = "${ var.in_vpc_id }"
 
     tags
     {

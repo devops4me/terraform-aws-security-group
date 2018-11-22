@@ -4,11 +4,6 @@ locals
     ecosystem_id = "sgrules-test"
 }
 
-module zero-paramaters
-{
-    source = ".."
-}
-
 module virtual-private-cloud-1
 {
     source       = "github.com/devops4me/terraform-aws-vpc-network"
@@ -18,13 +13,22 @@ module virtual-private-cloud-1
     in_ecosystem = "${ local.ecosystem_id }-01"
 }
 
-module security-group-test-1
+module security-group-test-1a
 {
     source         = ".."
-    in_ingress     = [ "ssh", "http", "https" ]
     in_vpc_id      = "${ module.virtual-private-cloud-1.out_vpc_id }"
+    in_ingress     = [ "ssh", "http", "https" ]
     in_use_default = "false"
-    in_ecosystem   = "${ local.ecosystem_id }-01"
+    in_ecosystem   = "${ local.ecosystem_id }-1a"
+}
+
+module security-group-test-1b
+{
+    source         = ".."
+    in_vpc_id      = "${ module.virtual-private-cloud-1.out_vpc_id }"
+    in_ingress     = [ "elasticsearch", "java" ]
+    in_use_default = "true"
+    in_ecosystem   = "${ local.ecosystem_id }-1b"
 }
 
 module virtual-private-cloud-2
@@ -36,14 +40,14 @@ module virtual-private-cloud-2
     in_ecosystem = "${ local.ecosystem_id }-02"
 }
 
-module security-group-test-2
+module security-group-test-2a
 {
     source         = ".."
     in_ingress     = [ "elasticsearch", "ssh", "java" ]
     in_egress      = [ "all-traffic" ]
     in_vpc_id      = "${ module.virtual-private-cloud-2.out_vpc_id }"
-    in_use_default = "false"
-    in_ecosystem   = "${ local.ecosystem_id }-02"
+    in_use_default = "true"
+    in_ecosystem   = "${ local.ecosystem_id }-2a"
 }
 
 # = ===
@@ -51,13 +55,13 @@ module security-group-test-2
 #      - does not specify egress rules (expecting all-traffic default).
 #      - latches onto the default VPC security group ( in_use_default = true )
 # = ===
-module security-group-test-3
+module security-group-test-2b
 {
     source         = "github.com/devops4me/terraform-aws-security-group"
-    in_ingress     = [ "ssh", "http", "https" ]
     in_vpc_id      = "${ module.virtual-private-cloud-2.out_vpc_id }"
+    in_ingress     = [ "etcd-client", "etcd-server", "rabbitmq" ]
     in_use_default = "false"
-    in_ecosystem   = "${ local.ecosystem_id }-03"
+    in_ecosystem   = "${ local.ecosystem_id }-2b"
 }
 
 output security_group_id

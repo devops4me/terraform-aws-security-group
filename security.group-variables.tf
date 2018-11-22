@@ -34,7 +34,6 @@ variable in_egress
 variable in_vpc_id
 {
     description = "umbrella vpc the security group falls under which reverts to the default VPC if not set."
-    default     = ""
 }
 
 
@@ -69,7 +68,7 @@ variable in_egress_cidr_blocks
 variable in_use_default
 {
     description = "By default rules are added to the default security group - false creates one first."
-    default = false
+    default = true
 }
 
 ### ######################### ###
