@@ -56,7 +56,7 @@ module security-group-test-3
     source         = "github.com/devops4me/terraform-aws-security-group"
     in_ingress     = [ "ssh", "http", "https" ]
     in_vpc_id      = "${ module.virtual-private-cloud-2.out_vpc_id }"
-    in_use_default = "true"
+    in_use_default = "false"
     in_ecosystem   = "${ local.ecosystem_id }-03"
 }
 
