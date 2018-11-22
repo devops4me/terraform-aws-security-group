@@ -23,7 +23,7 @@ module security-group-test-1
     source         = ".."
     in_ingress     = [ "ssh", "http", "https" ]
     in_vpc_id      = "${ module.virtual-private-cloud-1.out_vpc_id }"
-    in_use_default = "true"
+    in_use_default = "false"
     in_ecosystem   = "${ local.ecosystem_id }-01"
 }
 
