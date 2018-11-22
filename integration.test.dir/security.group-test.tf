@@ -15,7 +15,7 @@ module virtual-private-cloud-1
     in_vpc_cidr  = "10.123.0.0/16"
     in_create_private_gateway = false
     in_create_public_gateway  = false
-    in_ecosystem = "${ local.ecosystem_id }"
+    in_ecosystem = "${ local.ecosystem_id }-01"
 }
 
 module security-group-test-1
@@ -33,7 +33,7 @@ module virtual-private-cloud-2
     in_vpc_cidr  = "10.124.0.0/16"
     in_create_private_gateway = false
     in_create_public_gateway  = false
-    in_ecosystem = "${ local.ecosystem_id }"
+    in_ecosystem = "${ local.ecosystem_id }-02"
 }
 
 module security-group-test-2
@@ -57,7 +57,7 @@ module security-group-test-3
     in_ingress     = [ "ssh", "http", "https" ]
     in_vpc_id      = "${ module.virtual-private-cloud-2.out_vpc_id }"
     in_use_default = "true"
-    in_ecosystem   = "${ local.ecosystem_id }"
+    in_ecosystem   = "${ local.ecosystem_id }-03"
 }
 
 output security_group_id
