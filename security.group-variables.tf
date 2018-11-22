@@ -69,7 +69,7 @@ variable in_egress_cidr_blocks
 variable in_use_default
 {
     description = "By default rules are added to the default security group - false creates one first."
-    default = true
+    default = false
 }
 
 ### ######################### ###
