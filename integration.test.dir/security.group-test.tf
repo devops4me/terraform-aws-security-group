@@ -18,7 +18,7 @@ module security-group-test-1a
     source         = ".."
     in_vpc_id      = "${ module.virtual-private-cloud-1.out_vpc_id }"
     in_ingress     = [ "elasticsearch", "java" ]
-    in_use_default = "false"
+    in_use_default = false
     in_ecosystem   = "${ local.ecosystem_id }-1a"
 }
 
@@ -27,7 +27,7 @@ module security-group-test-1b
     source         = ".."
     in_vpc_id      = "${ module.virtual-private-cloud-1.out_vpc_id }"
     in_ingress     = [ "ssh", "http", "https" ]
-    in_use_default = "true"
+    in_use_default = true
     in_ecosystem   = "${ local.ecosystem_id }-1b"
 }
 
@@ -46,7 +46,7 @@ module security-group-test-2a
     in_ingress     = [ "elasticsearch", "ssh", "java" ]
     in_egress      = [ "all-traffic" ]
     in_vpc_id      = "${ module.virtual-private-cloud-2.out_vpc_id }"
-    in_use_default = "true"
+    in_use_default = true
     in_ecosystem   = "${ local.ecosystem_id }-2a"
 }
 
@@ -60,7 +60,7 @@ module security-group-test-2b
     source         = "github.com/devops4me/terraform-aws-security-group"
     in_vpc_id      = "${ module.virtual-private-cloud-2.out_vpc_id }"
     in_ingress     = [ "etcd-client", "etcd-server", "rabbitmq" ]
-    in_use_default = "false"
+    in_use_default = false
     in_ecosystem   = "${ local.ecosystem_id }-2b"
 }
 
