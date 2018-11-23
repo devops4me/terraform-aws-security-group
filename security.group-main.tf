@@ -14,10 +14,10 @@ resource aws_security_group new
 
     tags
     {
-        Name     = "${ var.in_use_default ? "empty-sg" : "security-group" }-${ var.in_ecosystem }-${ module.ecosys.out_stamp }-n"
+        Name     = "security-group-${ var.in_ecosystem }-${ module.ecosys.out_stamp }"
         Class    = "${ var.in_ecosystem }"
         Instance = "${ var.in_ecosystem }-${ module.ecosys.out_stamp }"
-        Desc     = "${ var.in_use_default ? "Empty" : "Newly created" } security group for ${ var.in_ecosystem } ${ module.ecosys.out_history_note }"
+        Desc     = "New security group for ${ var.in_ecosystem } ${ module.ecosys.out_history_note }"
     }
 
 }
