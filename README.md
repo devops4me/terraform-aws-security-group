@@ -3,7 +3,7 @@
 
 **You avoid hundreds of lines of similar security group definitions** by using this rule creation module.
 
-In **just one line** with words like **ssh**, **https**, **sftp**, **rabbitmq**, **openvpn** or **all-traffic** you specify every AWS security group rule that you need. You can opt to create a new security group or use the VPC's default security group.
+In **just one line** with words like **ssh**, **https**, **sftp**, **rabbitmq**, **openvpn** or **all-traffic** you specify every AWS security group rule that you need. This module always creates a new security group because **Terraform cannot correctly adopt the VPC's default security group** - it exhibits problems setting the descriptions and fails as it attempts to destroy it.
 
 ## Usage
 
@@ -32,11 +32,11 @@ These base infrastructure components house every AWS eco-system and are designed
 
 What is the use case flow at the heart of this security group rule creation module?
 
-- a **VPC is provided** (or the default one is used)
-- a **security group is created** (or the default one for the VPC is used)
+- a **VPC is mandatorily provided**
+- a **new security group is created**
 - **ingress and egress rules are added to the security group**
 - the default source (and/or destination) of 0.0.0.0/0 is used
-- the rules can apply to specific supplied (source and/or destination) addresses
+- the rules can apply the specified IP address ranges (through CIDR blocks for the source and/or destination of traffic to allow.
 
 
 ## Inputs
@@ -46,7 +46,6 @@ The security group's input variables are vital to achieving the desired behaviou
 | Imported | Type | Default | Comment |
 |:-------- |:---- |:------- |:------- |
 **in_vpc_id** | String | vpc-1234567890 | create security group/s under VPC with this id
-**in_use_default** | Boolean | [ true ] | use the default security group if true else create one
 **in_ingress** | List | [ "postgres", "https"] | identify the ports to allow for inbound traffic
 **in_egress** | List | [ "all-traffic" ] | identify the ports to allow for outbound traffic
 **in_ingress_cidr_blocks** | List | [ "0.0.0.0/0"] | list of source incoming traffic addresses to allow
@@ -69,8 +68,6 @@ Passing **false** to the **in_use_default** flag causes the **creation of a secu
         in_vpc_id  = "${module.xyz.out_vpc_id}"
         in_ingress = [ "ssh", "http", "https" ]
         in_egress  = [ "all-traffic" ]
-
-        in_use_default = false
     }
 
 Note that this module only creates one security group at a time. To create two or more simply repeat the module declaration using a different name each time.

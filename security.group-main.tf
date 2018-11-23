@@ -1,12 +1,13 @@
 
-### ####################################### ###
-### [[resource]] aws_default_security_group ###
-### ####################################### ###
-
+/*
+ | --
+ | -- This is the main security group resource for aggregating the
+ | -- ingress and egress rules. It is important for now to always
+ | -- create another security group as Terraform cannot easily handle
+ | -- importing and changing the VPC's default security group.
+*/
 resource aws_security_group new
 {
-###################    count = "${ var.in_use_default ? 0 : 1 }"
-
     vpc_id      = "${ var.in_vpc_id }"
     name        = "security-group-${ var.in_ecosystem }-${ module.ecosys.out_stamp }-n"
     description = "This new security group ${ module.ecosys.out_history_note }"
@@ -22,38 +23,16 @@ resource aws_security_group new
 }
 
 
-### ####################################### ###
-### [[resource]] aws_default_security_group ###
-### ####################################### ###
-
 /*
-resource aws_default_security_group default
-{
-    count = "${ var.in_use_default }"
-
-    vpc_id = "${ var.in_vpc_id }"
-
-    tags
-    {
-        Name     = "security-group-${ var.in_ecosystem }-${ module.ecosys.out_stamp }-d"
-        Class    = "${ var.in_ecosystem }"
-        Instance = "${ var.in_ecosystem }-${ module.ecosys.out_stamp }"
-        Desc     = "The default security group in vpc for ${ var.in_ecosystem } ${ module.ecosys.out_history_note }"
-    }
-
-}
+ | --
+ | -- Add the incoming ingress rules to the aggregating security
+ | -- group. The cidr blocks define the source from which traffic
+ | -- can flow. You can pass in 0.0.0.0/0 for anywhere but also
+ | -- specify IP address ranges right down to a single host.
 */
-
-
-### #################################### ###
-### [[resource]] aws_security_group_rule ###
-### #################################### ###
-
 resource aws_security_group_rule ingress
 {
     count = "${length(var.in_ingress)}"
-
-###########    security_group_id = "${ var.in_use_default ? aws_default_security_group.default.id : aws_security_group.new.id }"
 
     security_group_id = "${ aws_security_group.new.id }"
 
@@ -67,15 +46,17 @@ resource aws_security_group_rule ingress
 }
 
 
-### #################################### ###
-### [[resource]] aws_security_group_rule ###
-### #################################### ###
-
+/*
+ | --
+ | -- Add the outgoing egress rules to the aggregating security
+ | -- group. The cidr blocks define the destinations to which traffic
+ | -- can flow. You can pass in 0.0.0.0/0 for anywhere or you can
+ | -- specify IP address ranges right down to a single destined host.
+*/
 resource aws_security_group_rule egress
 {
     count = "${length(var.in_egress)}"
 
-#############    security_group_id = "${ var.in_use_default ? aws_default_security_group.default.id : aws_security_group.new.id }"
     security_group_id = "${ aws_security_group.new.id }"
 
     type        = "egress"
