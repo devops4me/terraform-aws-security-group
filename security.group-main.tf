@@ -5,7 +5,7 @@
 
 resource aws_security_group new
 {
-    count = "${ var.in_use_default ? 0 : 1 }"
+###################    count = "${ var.in_use_default ? 0 : 1 }"
 
     vpc_id      = "${ var.in_vpc_id }"
     name        = "security-group-${ var.in_ecosystem }-${ module.ecosys.out_stamp }-n"
@@ -26,6 +26,7 @@ resource aws_security_group new
 ### [[resource]] aws_default_security_group ###
 ### ####################################### ###
 
+/*
 resource aws_default_security_group default
 {
     count = "${ var.in_use_default }"
@@ -41,6 +42,7 @@ resource aws_default_security_group default
     }
 
 }
+*/
 
 
 ### #################################### ###
@@ -51,7 +53,9 @@ resource aws_security_group_rule ingress
 {
     count = "${length(var.in_ingress)}"
 
-    security_group_id = "${ var.in_use_default ? aws_default_security_group.default.id : aws_security_group.new.id }"
+###########    security_group_id = "${ var.in_use_default ? aws_default_security_group.default.id : aws_security_group.new.id }"
+
+    security_group_id = "${ aws_security_group.new.id }"
 
     type        = "ingress"
     cidr_blocks = ["${var.in_ingress_cidr_blocks}"]
@@ -71,7 +75,8 @@ resource aws_security_group_rule egress
 {
     count = "${length(var.in_egress)}"
 
-    security_group_id = "${ var.in_use_default ? aws_default_security_group.default.id : aws_security_group.new.id }"
+#############    security_group_id = "${ var.in_use_default ? aws_default_security_group.default.id : aws_security_group.new.id }"
+    security_group_id = "${ aws_security_group.new.id }"
 
     type        = "egress"
     cidr_blocks = ["${var.in_egress_cidr_blocks}"]
