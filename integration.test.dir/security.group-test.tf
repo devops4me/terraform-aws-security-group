@@ -17,7 +17,7 @@ module security-group-test-1a
 {
     source         = ".."
     in_vpc_id      = "${ module.virtual-private-cloud-1.out_vpc_id }"
-    in_ingress     = [ "ssh", "http", "https" ]
+    in_ingress     = [ "elasticsearch", "java" ]
     in_use_default = "false"
     in_ecosystem   = "${ local.ecosystem_id }-1a"
 }
@@ -26,7 +26,7 @@ module security-group-test-1b
 {
     source         = ".."
     in_vpc_id      = "${ module.virtual-private-cloud-1.out_vpc_id }"
-    in_ingress     = [ "elasticsearch", "java" ]
+    in_ingress     = [ "ssh", "http", "https" ]
     in_use_default = "true"
     in_ecosystem   = "${ local.ecosystem_id }-1b"
 }
