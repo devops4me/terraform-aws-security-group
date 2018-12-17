@@ -66,7 +66,7 @@ module security-group-test-2b
 {
     source         = "github.com/devops4me/terraform-aws-security-group"
     in_vpc_id      = "${ module.virtual-private-cloud-2.out_vpc_id }"
-    in_ingress     = [ "etcd-client", "etcd-server", "rabbitmq" ]
+    in_ingress     = [ "etcd-client", "etcd-server", "epmd" ]
 
     in_ecosystem_name     = "${ local.ecosystem_name }-2b"
     in_tag_timestamp      = "${ module.resource-tags.out_tag_timestamp }"
