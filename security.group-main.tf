@@ -9,15 +9,15 @@
 resource aws_security_group new
 {
     vpc_id      = "${ var.in_vpc_id }"
-    name        = "security-group-${ var.in_ecosystem }-${ module.ecosys.out_stamp }-n"
-    description = "This new security group ${ module.ecosys.out_history_note }"
+    name        = "security-group-${ var.in_ecosystem_name }-${ var.in_tag_timestamp }-n"
+    description = "This new security group ${ var.in_tag_description }"
 
     tags
     {
-        Name     = "security-group-${ var.in_ecosystem }-${ module.ecosys.out_stamp }"
-        Class    = "${ var.in_ecosystem }"
-        Instance = "${ var.in_ecosystem }-${ module.ecosys.out_stamp }"
-        Desc     = "New security group for ${ var.in_ecosystem } ${ module.ecosys.out_history_note }"
+        Name     = "security-group-${ var.in_ecosystem_name }-${ var.in_tag_timestamp }"
+        Class    = "${ var.in_ecosystem_name }"
+        Instance = "${ var.in_ecosystem_name }-${ var.in_tag_timestamp }"
+        Desc     = "New security group for ${ var.in_ecosystem_name } ${ var.in_tag_description }"
     }
 
 }
@@ -66,14 +66,4 @@ resource aws_security_group_rule egress
     from_port   = "${element(var.rules[var.in_egress[count.index]], 0)}"
     to_port     = "${element(var.rules[var.in_egress[count.index]], 1)}"
     protocol    = "${element(var.rules[var.in_egress[count.index]], 2)}"
-}
-
-
-### ################# ###
-### [[module]] ecosys ###
-### ################# ###
-
-module ecosys
-{
-    source = "github.com/devops4me/terraform-aws-stamps"
 }
