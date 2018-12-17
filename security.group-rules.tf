@@ -46,15 +46,15 @@ variable "rules"
 	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
 	# < ~~~ message queue related protocols ~~~ >
 	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
-        rabbitmq     = [  15672,  15672, "tcp", "rabbitmq admin cli"  ]
-        rabbitmq-tls = [  25672,  25672, "tcp", "rabbitmq admin tls"  ]
-        rabbit-comms = [  35672,  35682, "tcp", "rabbit comm ports"   ]
-        amqp         = [  5672,   5672,  "tcp", "msg queue protocol"  ]
-        amqp-tls     = [  5671,   5671,  "tcp", "msg queue secure"    ]
-        epmd         = [  4369,   4369,  "tcp", "erlang port mapper"  ]
-        stomp        = [  61613,  61613, "tcp", "stomp plain text"    ]
-        stomp-tls    = [  61614,  61614, "tcp", "stomp secure ssl"    ]
-        mqtt         = [  1883,   1883,  "tcp", "mq series telemetry" ]
+        rmq-admin = [  15672,  15672, "tcp", "rabbitmq admin cli"  ]
+        rmq-tls   = [  25672,  25672, "tcp", "rabbitmq admin tls"  ]
+        rmq-comms = [  35672,  35682, "tcp", "rabbit comm ports"   ]
+        amqp      = [  5672,   5672,  "tcp", "msg queue protocol"  ]
+        amqp-tls  = [  5671,   5671,  "tcp", "msg queue secure"    ]
+        epmd      = [  4369,   4369,  "tcp", "erlang port mapper"  ]
+        stomp     = [  61613,  61613, "tcp", "stomp plain text"    ]
+        stomp-tls = [  61614,  61614, "tcp", "stomp secure ssl"    ]
+        mqtt      = [  1883,   1883,  "tcp", "mq series telemetry" ]
 
 
 	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
