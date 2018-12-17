@@ -30,16 +30,19 @@ variable "rules"
 	# < ~~~ ~~~~~~~~~~~~~~~~ ~~~ >
         ssh = [ 22, 22, "tcp", "secure shell" ]
 
+
 	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
 	# < ~~~ http(s) - hyper text transfer protocol ~~~ >
 	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
         http  = [  80,  80, "tcp", "http plaintext" ]
         https = [ 443, 443, "tcp",   "http secured" ]
 
+
 	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
 	# < ~~~ gollum's webrick http server ~~~ >
 	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
         gollum = [ 4567, 4567, "tcp", "gollum wiki" ]
+
 
 	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
 	# < ~~~ Kubernetes Services Suite ~~~ >
@@ -49,6 +52,7 @@ variable "rules"
         kube-sched   = [ 10251, 10251, "tcp",  "kube scheduler" ]
         kube-control = [ 10252, 10252, "tcp", "kube controller" ]
         kube-read    = [ 10255, 10255, "tcp",  "kube read only" ]
+
 
 	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
 	# < ~~~ etcd client server api ~~~ >
@@ -85,14 +89,14 @@ variable "rules"
 	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
 	# < ~~~ rabbitmq and related protocols ~~~ >
 	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
-        rabbitmq     = [  15672,  15672, "tcp",     "rabbitmq admin cli" ]
-        rabbitmq-tls = [  25672,  25672, "tcp",     "rabbitmq admin tls" ]
-        amqp         = [  5672,   5672,  "tcp", "message queue protocol" ]
-        amqp-tls     = [  5671,   5671,  "tcp",   "message queue secure" ]
-        stomp        = [  61613,  61613, "tcp",      "STOMP without tls" ]
-        stomp-tls    = [  61614,  61614, "tcp",         "STOMP with tls" ]
-        erlang-pmd   = [  4369,   4369,  "tcp",     "erlang port mapper" ]
-        mqtt         = [  1883,   1883,  "tcp",    "mq series telemetry" ]
+        rabbitmq     = [  15672,  15672, "tcp",        "rabbitmq admin cli" ]
+        rabbitmq-tls = [  25672,  25672, "tcp",        "rabbitmq admin tls" ]
+        amqp         = [  5672,   5672,  "tcp",    "message queue protocol" ]
+        amqp-tls     = [  5671,   5671,  "tcp",      "message queue secure" ]
+        epmd         = [  4369,   4369,  "tcp", "erlang port mapper daemon" ]
+        stomp        = [  61613,  61613, "tcp",         "STOMP without tls" ]
+        stomp-tls    = [  61614,  61614, "tcp",            "STOMP with tls" ]
+        mqtt         = [  1883,   1883,  "tcp",       "mq series telemetry" ]
 
 
     }
