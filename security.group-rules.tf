@@ -31,6 +31,7 @@ variable "rules"
         ssh = [ 22, 22, "tcp", "secure shell" ]
         http  = [  80,  80, "tcp", "http plaintext" ]
         https = [ 443, 443, "tcp",   "http secured" ]
+        ahttp = [ 8888, 8888, "tcp", "alternate http" ]
 
 
 	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
