@@ -75,19 +75,22 @@ variable "rules"
         etcd-server = [ 2380, 2380, "tcp", "etcd server" ]
         etcd-listen = [ 4001, 4001, "tcp", "etcd listen" ]
 
+	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
+	# < ~~~ logging and elasticsearch stack tools ~~~ >
+	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
+        fluentd = [ 24224, 24224, "tcp", "fluentd logs"  ]
+        kibana  = [ 5601,  5601,  "tcp", "kibana portal" ]
+        elastic = [ 9200,  9200,  "tcp", "elasticsearch" ]
 
-        # -- ElasticSearch (ELK) Stack Rules
-	# -- Remember that ElasticSearch (ELK stack) can require up
-	# -- to 3 extra inbound ports for the JAVA API (9300), then
-	# -- the HTTP (80) and HTTPS (443) for the Kibana UI.
 
-        elasticsearch = [ 9200, 9200, "tcp", "elasticsearch" ]
-
-
-        # -- Java services traditionally employ port 8080
-	# -- (tomcat, jenkins, nexus, jserve ...)
-
-        java = [ 8080, 8080, "tcp", "HTTP" ]
+	# < ~~~ ~~~~~~~~~~~~ ~~~ >
+	# < ~~~ Java Tooling ~~~ >
+	# < ~~~ ~~~~~~~~~~~~ ~~~ >
+        java    = [ 8080, 8080, "tcp", "java port"     ]
+        tomcat  = [ 8080, 8080, "tcp", "tomcat server" ]
+        jenkins = [ 8080, 8080, "tcp", "jenkins ci"    ]
+        hudson  = [ 8080, 8080, "tcp", "hudson ci"     ]
+        nexus   = [ 8080, 8080, "tcp", "nexus dir"     ]
 
 
 	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
