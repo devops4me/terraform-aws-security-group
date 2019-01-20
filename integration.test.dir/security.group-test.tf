@@ -20,7 +20,7 @@ module security-group-test-1a
 {
     source         = ".."
     in_vpc_id      = "${ module.virtual-private-cloud-1.out_vpc_id }"
-    in_ingress     = [ "elasticsearch", "java" ]
+    in_ingress     = [ "elastic", "java" ]
 
     in_ecosystem_name     = "${ local.ecosystem_name }-1a"
     in_tag_timestamp      = "${ module.resource-tags.out_tag_timestamp }"
@@ -53,7 +53,7 @@ module virtual-private-cloud-2
 module security-group-test-2a
 {
     source         = ".."
-    in_ingress     = [ "elasticsearch", "ssh", "java" ]
+    in_ingress     = [ "elastic", "ssh", "java" ]
     in_egress      = [ "all-traffic" ]
     in_vpc_id      = "${ module.virtual-private-cloud-2.out_vpc_id }"
 
