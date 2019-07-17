@@ -68,6 +68,12 @@ variable "rules"
         kube-read    = [ 10255, 10255, "tcp",  "kube read only" ]
 
 
+	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
+	# < ~~~ ECS (Ec2 Container Service) Cluster ~~~ >
+	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
+        ecs-cluster  = [ 32768,  61000, "tcp",  "ecs cluster comms" ]
+
+
 	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
 	# < ~~~ etcd client server api ~~~ >
 	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
@@ -97,6 +103,12 @@ variable "rules"
 	# < ~~~ gollum's webrick http server ~~~ >
 	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
         gollum = [ 4567, 4567, "tcp", "gollum wiki" ]
+
+
+	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
+	# < ~~~ Database Management Systems ~~~ >
+	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
+        postgres   = [  5432,  5432, "tcp",  "postgresql db" ]
 
 
     }
