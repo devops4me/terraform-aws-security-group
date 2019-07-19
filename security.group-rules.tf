@@ -24,7 +24,6 @@ variable "rules"
 
     default
     {
-
 	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
 	# < ~~~ the most common traffic types ~~~ >
 	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
@@ -58,20 +57,16 @@ variable "rules"
         mqtt      = [  1883,   1883,  "tcp", "mq series telemetry" ]
 
 
-	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
-	# < ~~~ Kubernetes Services Suite ~~~ >
-	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
-        kubernetes   = [  6443,  6443, "tcp",  "kubernetes api" ]
-        kubelet-api  = [ 10250, 10250, "tcp",     "kubelet api" ]
-        kube-sched   = [ 10251, 10251, "tcp",  "kube scheduler" ]
-        kube-control = [ 10252, 10252, "tcp", "kube controller" ]
-        kube-read    = [ 10255, 10255, "tcp",  "kube read only" ]
-
-
-	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
-	# < ~~~ ECS (Ec2 Container Service) Cluster ~~~ >
-	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
-        ecs-cluster  = [ 32768,  61000, "tcp",  "ecs cluster comms" ]
+	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
+	# < ~~~ Containerized Services Suite ~~~ >
+	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
+        kubernetes   = [  6443,  6443, "tcp",   "kubernetes api" ]
+        kubelet-api  = [ 10250, 10250, "tcp",      "kubelet api" ]
+        kube-sched   = [ 10251, 10251, "tcp",   "kube scheduler" ]
+        kube-control = [ 10252, 10252, "tcp",  "kube controller" ]
+        kube-read    = [ 10255, 10255, "tcp",   "kube read only" ]
+        ecs-cluster  = [ 32768, 61000, "tcp", "ecs cluster chat" ]
+        docker       = [ 5000,   5000, "tcp",  "docker registry" ]
 
 
 	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
@@ -81,6 +76,7 @@ variable "rules"
         etcd-server = [ 2380, 2380, "tcp", "etcd server" ]
         etcd-listen = [ 4001, 4001, "tcp", "etcd listen" ]
 
+
 	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
 	# < ~~~ logging and elasticsearch stack tools ~~~ >
 	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
@@ -89,14 +85,15 @@ variable "rules"
         elastic = [ 9200,  9200,  "tcp", "elasticsearch" ]
 
 
-	# < ~~~ ~~~~~~~~~~~~ ~~~ >
-	# < ~~~ Java Tooling ~~~ >
-	# < ~~~ ~~~~~~~~~~~~ ~~~ >
+	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
+	# < ~~~ Java EcoSystem Tooling ~~~ >
+	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
         java    = [ 8080, 8080, "tcp", "java port"     ]
         tomcat  = [ 8080, 8080, "tcp", "tomcat server" ]
         jenkins = [ 8080, 8080, "tcp", "jenkins ci"    ]
         hudson  = [ 8080, 8080, "tcp", "hudson ci"     ]
         nexus   = [ 8080, 8080, "tcp", "nexus dir"     ]
+        sonar   = [ 9000, 9000, "tcp", "sonarqube metrics" ]
 
 
 	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
