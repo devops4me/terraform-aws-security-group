@@ -60,13 +60,13 @@ variable "rules"
 	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
 	# < ~~~ Containerized Services Suite ~~~ >
 	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
-        kubernetes   = [  6443,  6443, "tcp",   "kubernetes api" ]
-        kubelet-api  = [ 10250, 10250, "tcp",      "kubelet api" ]
-        kube-sched   = [ 10251, 10251, "tcp",   "kube scheduler" ]
-        kube-control = [ 10252, 10252, "tcp",  "kube controller" ]
-        kube-read    = [ 10255, 10255, "tcp",   "kube read only" ]
-        ecs-cluster  = [ 32768, 61000, "tcp", "ecs cluster chat" ]
-        docker       = [ 5000,   5000, "tcp",  "docker registry" ]
+        kubernetes   = [  6443,  6443, "tcp",  "kubernetes api" ]
+        kubelet-api  = [ 10250, 10250, "tcp",     "kubelet api" ]
+        kube-sched   = [ 10251, 10251, "tcp",  "kube scheduler" ]
+        kube-control = [ 10252, 10252, "tcp", "kube controller" ]
+        kube-read    = [ 10255, 10255, "tcp",  "kube read only" ]
+        ecs          = [ 32768, 61000, "tcp",   "cluster comms" ]
+        docker       = [ 5000,   5000, "tcp", "docker registry" ]
 
 
 	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
