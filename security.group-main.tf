@@ -6,8 +6,8 @@
  | -- create another security group as Terraform cannot easily handle
  | -- importing and changing the VPC's default security group.
 */
-resource aws_security_group new
-{
+resource aws_security_group new {
+
     vpc_id      = "${ var.in_vpc_id }"
     name        = "security-group-${ var.in_ecosystem_name }-${ var.in_tag_timestamp }-n"
     description = "This new security group ${ var.in_tag_description }"
@@ -30,8 +30,8 @@ resource aws_security_group new
  | -- can flow. You can pass in 0.0.0.0/0 for anywhere but also
  | -- specify IP address ranges right down to a single host.
 */
-resource aws_security_group_rule ingress
-{
+resource aws_security_group_rule ingress {
+
     count = "${length(var.in_ingress)}"
 
     security_group_id = "${ aws_security_group.new.id }"
@@ -53,8 +53,8 @@ resource aws_security_group_rule ingress
  | -- can flow. You can pass in 0.0.0.0/0 for anywhere or you can
  | -- specify IP address ranges right down to a single destined host.
 */
-resource aws_security_group_rule egress
-{
+resource aws_security_group_rule egress {
+
     count = "${length(var.in_egress)}"
 
     security_group_id = "${ aws_security_group.new.id }"

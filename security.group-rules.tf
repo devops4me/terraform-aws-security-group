@@ -17,13 +17,13 @@
 # -- IPV6 Cidr block another will be created to ::/0 in addition to the
 # -- one with the 0.0.0.0/0 (IPV4) notation.
 
-variable "rules"
-{
+variable rules {
+
     description = "Modular rules allowing either TCP or UDP traffic."
     type = "map"
 
-    default
-    {
+    default {
+
 	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
 	# < ~~~ the most common traffic types ~~~ >
 	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
