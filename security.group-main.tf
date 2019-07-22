@@ -12,8 +12,8 @@ resource aws_security_group new {
     name        = "security-group-${ var.in_ecosystem_name }-${ var.in_tag_timestamp }-n"
     description = "This new security group ${ var.in_tag_description }"
 
-    tags
-    {
+    tags {
+
         Name     = "security-group-${ var.in_ecosystem_name }-${ var.in_tag_timestamp }"
         Class    = "${ var.in_ecosystem_name }"
         Instance = "${ var.in_ecosystem_name }-${ var.in_tag_timestamp }"
