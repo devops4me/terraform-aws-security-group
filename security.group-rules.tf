@@ -18,11 +18,40 @@
 # -- one with the 0.0.0.0/0 (IPV4) notation.
 
 variable rules {
+  type = object({
+    http = list(string)
+    all-traffic = list(string)
+    ecs = list(string)
+    docker = list(string)
+    java = list(string)
+    jenkins = list(string)
+    sonar = list(string)
+    postgres = list(string)
+  })
+}
+
+
+locals {
+  rules = {
+        http  = [  80,  80, "tcp", "http plaintext" ]
+        all-traffic   = [ -1, -1,    "-1",   "All protocols" ]
+        ecs          = [ 32768, 61000, "tcp",   "cluster comms" ]
+        docker       = [ 5000,   5000, "tcp", "docker registry" ]
+        java    = [ 8080, 8080, "tcp", "java port"     ]
+        jenkins = [ 8080, 8080, "tcp", "jenkins ci"    ]
+        sonar   = [ 9000, 9000, "tcp", "sonarqube metrics" ]
+        postgres   = [  5432,  5432, "tcp",  "postgresql db" ]
+  }
+}
+
+
+/*
+variable rules {
 
     description = "Modular rules allowing either TCP or UDP traffic."
     type = any
 
-    default {
+    default = {
 
 	# < ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~ >
 	# < ~~~ the most common traffic types ~~~ >
@@ -111,3 +140,4 @@ variable rules {
     }
 
 }
+*/
