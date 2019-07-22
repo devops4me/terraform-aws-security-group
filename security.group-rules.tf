@@ -20,7 +20,7 @@
 variable rules {
 
     description = "Modular rules allowing either TCP or UDP traffic."
-    type = "map"
+    type = any
 
     default {
 
