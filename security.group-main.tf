@@ -37,7 +37,7 @@ resource aws_security_group_rule ingress {
     security_group_id = "${ aws_security_group.new.id }"
 
     type        = "ingress"
-    cidr_blocks = ["${var.in_ingress_cidr_blocks}"]
+    cidr_blocks = "${var.in_ingress_cidr_blocks}"
     description = "${element(var.rules[var.in_ingress[count.index]], 3)}"
 
     from_port   = "${element(var.rules[var.in_ingress[count.index]], 0)}"
@@ -60,7 +60,7 @@ resource aws_security_group_rule egress {
     security_group_id = "${ aws_security_group.new.id }"
 
     type        = "egress"
-    cidr_blocks = ["${var.in_egress_cidr_blocks}"]
+    cidr_blocks = "${var.in_egress_cidr_blocks}"
     description = "${element(var.rules[var.in_egress[count.index]], 3)}"
 
     from_port   = "${element(var.rules[var.in_egress[count.index]], 0)}"
