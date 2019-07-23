@@ -32,7 +32,7 @@
 
 variable rules {
 
-    type = map( string, list( string ) )
+    type = map(string,list(string))
 
     default = {
         "https"       = [ "443", "443", "tcp",   "http secured" ]
