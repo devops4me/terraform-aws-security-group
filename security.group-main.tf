@@ -39,9 +39,9 @@ resource aws_security_group_rule ingress {
     cidr_blocks = var.in_ingress_cidr_blocks
     description = element( var.rules[ var.in_ingress[ count.index ] ], 3 )
 
-    from_port   = "${element(var.rules[var.in_ingress[count.index]], 0)}"
-    to_port     = "${element(var.rules[var.in_ingress[count.index]], 1)}"
-    protocol    = "${element(var.rules[var.in_ingress[count.index]], 2)}"
+    from_port = element( var.rules[ var.in_ingress[ count.index ] ], 0 )
+    to_port   = element( var.rules[ var.in_ingress[ count.index ] ], 1 )
+    protocol  = element( var.rules[ var.in_ingress[ count.index ] ], 2 )
 }
 
 
@@ -60,9 +60,9 @@ resource aws_security_group_rule egress {
 
     type        = "egress"
     cidr_blocks = "${var.in_egress_cidr_blocks}"
-    description = "${element(var.rules[var.in_egress[count.index]], 3)}"
+    description = element( var.rules[ var.in_egress[ count.index ] ], 3 )
 
-    from_port   = "${element(var.rules[var.in_egress[count.index]], 0)}"
-    to_port     = "${element(var.rules[var.in_egress[count.index]], 1)}"
-    protocol    = "${element(var.rules[var.in_egress[count.index]], 2)}"
+    from_port = element( var.rules[ var.in_egress[ count.index ] ], 0 )
+    to_port   = element( var.rules[ var.in_egress[ count.index ] ], 1 )
+    protocol  = element( var.rules[ var.in_egress[ count.index ] ], 2 )
 }
