@@ -35,8 +35,9 @@ variable rules {
     type = map( list( string ) )
 
     default = {
+        "ssh"         = [ "22", "22", "tcp", "secure shell" ]
         "https"       = [ "443", "443", "tcp",   "http secured" ]
-        "http"        = [  "80",  "80", "tcp", "http plaintext" ]
+        "http"        = [ "80",  "80", "tcp", "http plaintext" ]
         "all-traffic" = [ "-1", "-1",    "-1",   "All protocols" ]
         "ecs"         = [ "32768", "61000", "tcp",   "cluster comms" ]
         "docker"      = [ "5000",   "5000", "tcp", "docker registry" ]
