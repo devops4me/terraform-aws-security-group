@@ -61,6 +61,18 @@ variable in_egress_cidr_blocks {
 }
 
 
+### ############################## ###
+### [[variable]] in_mandatory_tags ###
+### ############################## ###
+
+variable in_mandatory_tags {
+
+    description = "Optional tags unless your organization mandates a tag set to be placed on this resource."
+    type        = "map"
+    default     = { }
+}
+
+
 ### ################# ###
 ### in_ecosystem_name ###
 ### ################# ###

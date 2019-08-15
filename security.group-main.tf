@@ -1,10 +1,9 @@
 
 locals {
 
-    ResourceTags = {
-        Weekday = "Thursday"
-        Millenia = "21st"
-        Season = "Summer"
+    security_group_tags = {
+        Name = "security-group-${ var.in_ecosystem_name }-${ var.in_tag_timestamp }"
+        Desc = "New security group for ${ var.in_ecosystem_name } ${ var.in_tag_description }"
     }
 
 }
@@ -18,22 +17,10 @@ locals {
 */
 resource aws_security_group new {
 
-    vpc_id      = "${ var.in_vpc_id }"
+    vpc_id      = var.in_vpc_id
     name        = "security-group-${ var.in_ecosystem_name }-${ var.in_tag_timestamp }-n"
     description = "This new security group ${ var.in_tag_description }"
-
-
-    tags = local.ResourceTags
-
-/*
-    tags = {
-
-        Name     = "security-group-${ var.in_ecosystem_name }-${ var.in_tag_timestamp }"
-        Class    = "${ var.in_ecosystem_name }"
-        Instance = "${ var.in_ecosystem_name }-${ var.in_tag_timestamp }"
-        Desc     = "New security group for ${ var.in_ecosystem_name } ${ var.in_tag_description }"
-    }
-*/
+    tags        = merge( local.security_group_tags, var.in_mandatory_tags )
 
 }
 
@@ -69,12 +56,11 @@ resource aws_security_group_rule ingress {
 */
 resource aws_security_group_rule egress {
 
-    count = "${length(var.in_egress)}"
-
-    security_group_id = "${ aws_security_group.new.id }"
+    count = length( var.in_egress )
+    security_group_id = aws_security_group.new.id
 
     type        = "egress"
-    cidr_blocks = "${var.in_egress_cidr_blocks}"
+    cidr_blocks = var.in_egress_cidr_blocks
     description = element( var.rules[ var.in_egress[ count.index ] ], 3 )
 
     from_port = element( var.rules[ var.in_egress[ count.index ] ], 0 )
