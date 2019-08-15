@@ -1,4 +1,14 @@
 
+locals {
+
+    ResourceTags = {
+        Weekday = "Thursday"
+        Millenia = "21st"
+        Season = "Summer"
+    }
+
+}
+
 /*
  | --
  | -- This is the main security group resource for aggregating the
@@ -12,6 +22,10 @@ resource aws_security_group new {
     name        = "security-group-${ var.in_ecosystem_name }-${ var.in_tag_timestamp }-n"
     description = "This new security group ${ var.in_tag_description }"
 
+
+    tags = local.ResourceTags
+
+/*
     tags = {
 
         Name     = "security-group-${ var.in_ecosystem_name }-${ var.in_tag_timestamp }"
@@ -19,6 +33,7 @@ resource aws_security_group new {
         Instance = "${ var.in_ecosystem_name }-${ var.in_tag_timestamp }"
         Desc     = "New security group for ${ var.in_ecosystem_name } ${ var.in_tag_description }"
     }
+*/
 
 }
 
