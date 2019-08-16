@@ -67,8 +67,8 @@ variable in_egress_cidr_blocks {
 
 variable in_mandatory_tags {
 
-    description = "Optional tags unless your organization mandates a tag set to be placed on this resource."
-    type        = "map"
+    description = "Optional tags unless your organization mandates that a set of given tags must be set."
+    type        = map
     default     = { }
 }
 
