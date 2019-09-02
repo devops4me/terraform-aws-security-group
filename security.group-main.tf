@@ -20,7 +20,7 @@ resource aws_security_group new {
     vpc_id      = var.in_vpc_id
     name        = "security-group-${ var.in_ecosystem_name }-${ var.in_tag_timestamp }-n"
     description = "This new security group ${ var.in_tag_description }"
-    tags        = merge( local.security_group_tags, var.in_mandatory_tags )
+    tags        = merge( local.security_group_tags, var.in_mandated_tags )
 
 }
 
