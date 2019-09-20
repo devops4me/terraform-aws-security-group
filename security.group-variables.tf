@@ -74,31 +74,34 @@ variable in_mandated_tags {
 }
 
 
-### ################# ###
-### in_ecosystem_name ###
-### ################# ###
+### ############ ###
+### in_ecosystem ###
+### ############ ###
 
-variable in_ecosystem_name {
-
+variable in_ecosystem {
     description = "Creational stamp binding all infrastructure components created on behalf of this ecosystem instance."
+    default = "security-grp"
+    type    = string
 }
 
 
-### ################ ###
-### in_tag_timestamp ###
-### ################ ###
+### ############ ###
+### in_timestamp ###
+### ############ ###
 
-variable in_tag_timestamp {
-
+variable in_timestamp {
     description = "A timestamp for resource tags in the format ymmdd-hhmm like 80911-1435"
+    default     = "timestamp"
+    type        = string
 }
 
 
-### ################## ###
-### in_tag_description ###
-### ################## ###
+### ############## ###
+### in_description ###
+### ############## ###
 
-variable in_tag_description {
-
+variable in_description {
     description = "Ubiquitous note detailing who, when, where and why for every infrastructure component."
+    default     = "This VPC network was created for an ecosystem."
+    type        = string
 }
