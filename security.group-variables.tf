@@ -10,7 +10,7 @@
 variable in_ingress {
 
     description = "4 element list defining traffic to allow in (see traffic-rules.tf)"
-    type        = "list"
+    type        = list
     default     = [ "ssh" ]
 }
 
@@ -22,7 +22,7 @@ variable in_ingress {
 variable in_egress {
 
     description = "4 element list defining traffic to allow out (see traffic-rules.tf)"
-    type        = "list"
+    type        = list
     default = [ "all-traffic" ]
 }
 
@@ -33,7 +33,8 @@ variable in_egress {
 
 variable in_vpc_id {
 
-    description = "umbrella vpc the security group falls under which reverts to the default VPC if not set."
+    description = "Mandatory umbrella vpc the security group falls under which reverts to the default VPC if not set."
+    type = string
 }
 
 
@@ -44,7 +45,7 @@ variable in_vpc_id {
 variable in_ingress_cidr_blocks {
 
     description = "The IPv4 CIDR ranges from which traffic is allowed to originate."
-    type        = "list"
+    type        = list
     default     = [ "0.0.0.0/0" ]
 }
 
@@ -56,7 +57,7 @@ variable in_ingress_cidr_blocks {
 variable in_egress_cidr_blocks {
 
     description = "List of IPv4 CIDR ranges to use on all egress rules"
-    type        = "list"
+    type        = list
     default     = [ "0.0.0.0/0" ]
 }
 
