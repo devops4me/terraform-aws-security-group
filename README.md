@@ -10,7 +10,7 @@ In **just one line** with words like **ssh**, **https**, **sftp**, **rabbitmq**,
     module security_group {
 
         source  = "devops4me/security-group/aws"
-        version = "~> 1.0.3"
+        version = "~> 1.0.0"
 
         in_ingress = [ "ssh", "http", "https" ]
         in_vpc_id  = module.vpc.out_vpc_id
@@ -70,10 +70,12 @@ This security-group module **adds ingress and egress rules** to **either the def
 
 Passing **false** to the **in_use_default** flag causes the **creation of a security group**.
 
-    module security_group_module
-    {
-        source     = "security"
-        in_vpc_id  = "${module.xyz.out_vpc_id}"
+    module security_group_module {
+
+        source  = "devops4me/security-group/aws"
+        version = "~> 1.0.0"
+
+        in_vpc_id  = module.xyz.out_vpc_id
         in_ingress = [ "ssh", "http", "https" ]
         in_egress  = [ "all-traffic" ]
     }
