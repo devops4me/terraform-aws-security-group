@@ -7,25 +7,30 @@ In **just one line** with words like **ssh**, **https**, **sftp**, **rabbitmq**,
 
 ## Usage
 
-    module security_group
-    {
-        source     = "github.com/devops4me/terraform-aws-security-group"
+    module security_group {
+
+        source  = "devops4me/security-group/aws"
+        version = "~> 1.0.3"
+
         in_ingress = [ "ssh", "http", "https" ]
-        in_vpc_id  = "${module.vpc.out_vpc_id}"
+        in_vpc_id  = module.vpc.out_vpc_id
     }
 
     resource aws_instance ec2
     {
-        vpc_security_group_ids = [ "${module.security_group.out_security_group_id}" ]
+        vpc_security_group_ids = [ module.security_group.out_security_group_id ]
     }
 
 **out_security_group_id** is the fundamental module output **string** variable.
 
-## [Examples](integration.test.dir)
 
-For best results use this module in conjuction with the **[vpc subnets module](../../../terraform-aws-vpc-network)**. Visit the **[integration tests](integration.test.dir)** to discover how **just 2 simple modules** can create a VPC, subnets, internet gateway, route, security group and security group rules.
+---
 
-These base infrastructure components house every AWS eco-system and are designed to increase the productivity and efficiency of a devops engineer.
+
+## [Run the Example](https://github.com/devops4me/terraform-aws-security-group/tree/master/example)
+
+You can run the example to see this module create a number of VPCs with varying attributes such as the number of private/public subnets.
+
 
 
 ## Use Case
@@ -39,18 +44,21 @@ What is the use case flow at the heart of this security group rule creation modu
 - the rules can apply the specified IP address ranges (through CIDR blocks for the source and/or destination of traffic to allow.
 
 
-## Inputs
+---
+
+
+## Module Inputs
 
 The security group's input variables are vital to achieving the desired behaviour.
 
 | Imported | Type | Default | Comment |
-|:-------- |:---- |:------- |:------- |
-**in_vpc_id** | String | vpc-1234567890 | create security group/s under VPC with this id
-**in_ingress** | List | [ "postgres", "https"] | identify the ports to allow for inbound traffic
-**in_egress** | List | [ "all-traffic" ] | identify the ports to allow for outbound traffic
-**in_ingress_cidr_blocks** | List | [ "0.0.0.0/0"] | list of source incoming traffic addresses to allow
-**in_egress_cidr_blocks** | List | [ "0.0.0.0/0"] | list of VPC source outgoing traffic addresses to allow
-**in_ecosystem** | String | kube-19188-2306 | the ecosystem's identifier including a timestamp
+|:-------- |:----:|:------- |:------- |
+**`in_vpc_id`** | string | vpc-1234567890 | create security group/s under VPC with this id
+**`in_ingress`** | list | [ "postgres", "https"] | identify the ports to allow for inbound traffic
+**`in_egress`** | list | [ "all-traffic" ] | identify the ports to allow for outbound traffic
+**`in_ingress_cidr_blocks`** | list | [ "0.0.0.0/0"] | list of source incoming traffic addresses to allow
+**`in_egress_cidr_blocks`** | list | [ "0.0.0.0/0"] | list of VPC source outgoing traffic addresses to allow
+**`in_ecosystem`** | string | kube-19188-2306 | the ecosystem's identifier including a timestamp
 
 ## Alternate Module Inputs
 
@@ -94,38 +102,29 @@ Clearly you will want to allow ingress and egress traffic for various middleware
 Note that if you create an all traffic egress rule and you have an **IPV6 cidr block**, AWS will create an extra **::/0** egress rule in addition to the 0.0.0.0/0 (IPV4) rule.
 
 
-## Outputs
+### Optional Resource Tag Inputs
+
+Most organisations have a mandatory set of tags that must be placed on AWS resources for cost and billing reports. Typically they denote owners and specify whether environments are prod or non-prod.
+
+| Input Variable    | Variable Description | Input Example
+|:----------------- |:-------------------- |:----- |
+**`in_ecosystem`** | the ecosystem (environment) name these resources belong to | **`my-app-test`** or **`kubernetes-cluster`**
+**`in_timestamp`** | the timestamp in resource names helps you identify which environment instance resources belong to | **`1911021435`** as **`$(date +%y%m%d%H%M%S)`**
+**`in_description`** | a human readable description usually stating who is creating the resource and when and where | "was created by $USER@$HOSTNAME on $(date)."
+
+Try **`echo $(date +%y%m%d%H%M%S)`** to check your timestamp and **`echo "was created by $USER@$HOSTNAME on $(date)."`** to check your description. Here is how you can send these values to terraform.
+
+```
+export TF_VAR_in_timestamp=$(date +%y%m%d%H%M%S)
+export TF_VAR_in_description="was created by $USER@$HOSTNAME on $(date)."
+```
+
+
+---
+
+
+## Module Outputs
 
 | Exported                 | Type   | Comment |
 |:------------------------ |:------ |:------- |
-**out_security_group_id**  | String | ID of the security group that contains the specified rules
-
-
-### Contributing
-
-Bug reports and pull requests are welcome on GitHub at the https://github.com/devops4me/terraform-aws-security-group page. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
-
-License
--------
-
-MIT License
-Copyright (c) 2006 - 2014
-
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-'Software'), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+**`out_security_group_id`**  | String | ID of the security group that contains the specified rules
