@@ -19,6 +19,7 @@ variable rules {
         "java"        = [ "8080", "8080", "tcp", "java port"     ]
         "jenkins"     = [ "8080", "8080", "tcp", "jenkins ci"    ]
         "sonar"       = [ "9000", "9000", "tcp", "sonarqube metrics" ]
-        "postgres"    = [  "5432",  "5432", "tcp",  "postgresql db" ]
+        "rmq-admin"   = [ "15672",  "15672", "tcp", "rabbitmq admin cli" ]
+        "postgres"    = [ "5432",  "5432", "tcp",  "postgresql db" ]
     }
 }
